@@ -1,0 +1,7 @@
+/arduino-*
+*.pro
+*.sch-bak
+*-cache.lib
+*.o
+*.elf
+*.hex
