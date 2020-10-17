@@ -1,7 +1,7 @@
 
 # Minimal HID Gamepad using V-USB on ATtiny84
 
-This is a small experiment to create a driver-less gamepad from an ATtiny84.
+This is a small experiment to create a driver-less gamepad from an ATtiny84 (using external crystal) or an ATtiny85 (using internal PLL clock).
 
 
 ## Getting started
@@ -30,9 +30,17 @@ A few notes regarding hardware components:
  * As suggested by [V-USB documentation](https://www.obdev.at/products/vusb/index.html), two 3.6V zener diodes are used to limit voltage of D- and D+.
  * A pull-up (through a 1.5kOhm resistor) is applied on D-, to announce low speed.
  * Do not forget to also connect D+ to `INT0` (or to rearrange pins a bit).
- * An external 16MHz crystal is used instead of internal clock.
+ * If the pins on which D- or D+ are connected are also used to program the ATtiny, make sure to disconnect the programmer.
  * 10k resistors are used as pull-up/-down to avoid danging pins.
  * De-coupling capacitors are used on USB's VCC and near the ATtiny.
+
+ATTiny84 variant:
+
+ * An external 16MHz crystal is used instead of internal clock, as the ATtiny84 internal clock cannot reach minimum requirements.
+
+ATtiny85 variant:
+
+ * The internal PLL clock is set to 16MHz, and then over-clocked using OSCCAL.
 
 For more details, please refer to the schematics in the `schema` folder.
 
@@ -43,7 +51,7 @@ A few notes regarding software components:
 
  * Using [V-USB](https://www.obdev.at/products/vusb/index.html) (2012-12-06).
  * The following constants have been modified in `usbconfig.h`:
-   * `USB_CFG_IOPORTNAME`, `USB_CFG_DMINUS_BIT` and `USB_CFG_DPLUS_BIT`, as `PORTB` is busy with the crystal pins.
+   * `USB_CFG_IOPORTNAME`, `USB_CFG_DMINUS_BIT` and `USB_CFG_DPLUS_BIT`, to match the schematic.
    * `USB_CFG_HAVE_INTRIN_ENDPOINT` and `USB_CFG_INTR_POLL_INTERVAL`, to enable interruptions.
    * `USB_CFG_MAX_BUS_POWER`, to announce low consumption.
    * `USB_CFG_DEVICE_NAME` and `USB_CFG_DEVICE_NAME_LEN`, set to `Gamepad`.
@@ -54,6 +62,13 @@ A few notes regarding software components:
  * Watchdog timer is enabled, to allow automatic reboot on freeze.
  * The makefile assuming that the AVR toolchain is available in the path (e.g. the ones shipped with Arduino IDE).
  * Using `avrdude.conf` and `empty_all.hex` from [ATTinyCore](https://github.com/SpenceKonde/ATTinyCore) (1.4.1).
+
+ATtiny85 variant:
+
+ * In `usbconfig.h`:
+   * `USB_RESET_HOOK` is uncommented, and a forward definition for `hadUsbReset` is provided.
+   * `USB_CFG_HAVE_MEASURE_FRAME_LENGTH`, to define `usbMeasureFrameLength`, which is used to callibrate the clock.
+ * In `main.c`, `hadUsbReset` is implemented. A binary search is done to reach 16.5MHz by tweaking OSCCAL. The code is taken from [this blog](https://codeandlife.com/2012/02/22/v-usb-with-attiny45-attiny85-without-a-crystal/).
 
 
 ## Additional information
