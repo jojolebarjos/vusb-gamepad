@@ -355,13 +355,7 @@ Wire Wire Line
 Wire Wire Line
 	7550 2750 8050 2750
 Wire Wire Line
-	7550 2850 7650 2850
-Wire Wire Line
-	7550 2950 7650 2950
-Wire Wire Line
 	6050 3050 5950 3050
-NoConn ~ 7650 2850
-NoConn ~ 7650 2950
 NoConn ~ 5950 3050
 Text Label 8050 2650 2    50   ~ 0
 LED
@@ -530,4 +524,12 @@ Wire Wire Line
 Wire Wire Line
 	8350 1800 8350 2550
 Connection ~ 8350 2550
+Wire Wire Line
+	7550 2850 8050 2850
+Wire Wire Line
+	7550 2950 8050 2950
+Text Label 8050 2850 2    50   ~ 0
+D-
+Text Label 8050 2950 2    50   ~ 0
+D+
 $EndSCHEMATC
