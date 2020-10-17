@@ -4,14 +4,12 @@
 This is a small experiment to create a driver-less gamepad from an ATtiny84 (using external crystal) or an ATtiny85 (using internal PLL clock).
 
 
-## Getting started
+## Getting started with ATtiny85
 
-__The hardware setup assumes an external clock (16MHz crystal), do not flash if it is not the case!__
-
-First, reproduce the hardware setup, as described in the `schema` folder.
+First, reproduce the hardware setup, as described in `schema/internal.pdf`.
 
 Then, connect your ISP (provided makefile assumes Arduino as ISP on COM3).
-Go to the `code` subfolder and run:
+Go to the `code/internal` subfolder and run:
 
 ```
 make
