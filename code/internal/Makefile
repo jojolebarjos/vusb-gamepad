@@ -23,7 +23,7 @@ main.elf: main.o usbdrv/usbdrvasm.o usbdrv/usbdrv.o
 	$(CC) $(CFLAGS) -x assembler-with-cpp -c -o $@ $<
 
 flash:
-	echo $(DUDE) $(DUDEFLAGS) -e -Uefuse:w:0xFF:m -Uhfuse:w:0b11010111:m -Ulfuse:w:0xFF:m -Uflash:w:empty_all.hex:i 
+	echo $(DUDE) $(DUDEFLAGS) -e -Uefuse:w:0xFF:m -Uhfuse:w:0b11010111:m -Ulfuse:w:0xF1:m -Uflash:w:empty_all.hex:i 
 
 upload: main.hex
 	$(DUDE) $(DUDEFLAGS) -Uflash:w:main.hex:i

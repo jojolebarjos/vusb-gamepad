@@ -1,5 +1,5 @@
 
-# Minimal HID Gamepad using V-USB on ATtiny84
+# Minimal HID Gamepad using V-USB on ATtiny84 and ATtiny85
 
 This is a small experiment to create a driver-less gamepad from an ATtiny84 (using external crystal) or an ATtiny85 (using internal PLL clock).
 
@@ -132,6 +132,7 @@ See [this page](https://dntruong.wordpress.com/2015/07/08/setting-and-reading-at
 
 You can also directly send some hex file you compiled manually.
 See [the manual](https://www.cs.ou.edu/~fagg/classes/general/atmel/avrdude.pdf) for details.
+
 
 ## COM ports in Python
 
