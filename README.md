@@ -29,7 +29,7 @@ A few notes regarding hardware components:
  * A pull-up (through a 1.5kOhm resistor) is applied on D-, to announce low speed.
  * Do not forget to also connect D+ to `INT0` (or to rearrange pins a bit).
  * If the pins on which D- or D+ are connected are also used to program the ATtiny, make sure to disconnect the programmer.
- * 10k resistors are used as pull-up/-down to avoid danging pins.
+ * 10k resistors are used as pull-up/-down to avoid dangling pins.
  * De-coupling capacitors are used on USB's VCC and near the ATtiny.
 
 ATTiny84 variant:
